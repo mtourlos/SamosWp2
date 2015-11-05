@@ -1,6 +1,28 @@
 angular.module('starter.controllers', [])
-
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope) {
+	$scope.parkBreaker = "Ανοιχτός";
+	$scope.parkBreakerStyle={color:'lightgreen'};
+	$scope.aspBreaker = "Κλειστός";
+	$scope.aspBreakerStyle={color:'red'};
+	var i=0;
+	$scope.toggle = function(){
+		
+		if (i===0){
+			$scope.parkBreaker="Κλειστός";
+			$scope.parkBreakerStyle={color:'lightgreen'};
+		}else{
+			$scope.parkBreaker="Ανοιχτός"
+			$scope.parkBreakerStyle={color:'red'};
+		}
+		
+		if (i===0){
+			i=1;
+		}else if(i===1){
+			i=0
+		}
+	}
+	
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
