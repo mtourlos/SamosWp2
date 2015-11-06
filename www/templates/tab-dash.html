@@ -5,19 +5,21 @@
 			<div class="item item-divider text-center">MW 15{{totalMW}}</div>
 			<div class="item item-body">
 				<div class="row" >
-					<div class="col">
+					<div class="col col-50 text-center" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
 						<i class="icon ion-paper-airplane"></i>
-						'Ανέμος
+						'Ανεμος
 					</div>
-					<div class="col" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
-						14 {{windspeed}} m/s
-					</div>
-					<div class="col">
+					<div class="col col-50 text-center">
 						<i class="icon ion-flash"></i>
 						Τάση
 					</div>
-					<div class="col">
-						14 {{volts}} V
+				</div>
+				<div class="row">
+					<div class="col col-50 text-center" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
+						25{{windspeed}} m/s
+					</div>
+					<div class="col col-50 text-center">
+						14{{volts}} V
 					</div>
 				</div>
 			</div>
@@ -60,10 +62,12 @@
 				</div>
 				<div class="row" >
 					<div class="col col-50 text-center" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
-						<span ng-style="parkBreakerStyle">{{parkBreaker}}</span>
+						<span ng-if=parkBreaker=='true' ng-style={color:'lightgreen'}>Κλειστός</span>
+						<span ng-if=parkBreaker=='false' ng-style={color:'red'}>Ανοιχτός</span>
 					</div>
 					<div class="col col-50 text-center">
-						<span ng-style="aspBreakerStyle">{{aspBreaker}}</span>
+						<span ng-if=aspBreaker=='true' ng-style={color:'lightgreen'}>Κλειστός</span>
+						<span ng-if=aspBreaker=='false' ng-style={color:'red'}>Ανοιχτός</span>
 					</div>
 				</div>
 			</div>
