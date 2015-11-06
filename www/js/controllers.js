@@ -41,8 +41,6 @@ angular.module('starter.controllers', [])
   $scope.wg = Wgs.get($stateParams.wgId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('AccountCtrl', function($scope, Alarms) {
+  $scope.alarms = Alarms.all();
 });
