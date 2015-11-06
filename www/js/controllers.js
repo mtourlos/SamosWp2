@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
-.controller('DashCtrl', function($scope) {
-	$scope.parkBreaker = "false";
-	$scope.aspBreaker = "true";
+.controller('DashCtrl', function($scope, WSocket) {
+	//$scope.parkBreaker = "false";
+	//$scope.aspBreaker = "true";
 	var i=0;
 	$scope.toggle = function(){
 		
@@ -18,7 +18,17 @@ angular.module('starter.controllers', [])
 		}else if(i===1){
 			i=0
 		}
-	}
+	};
+	
+	$scope.receive = function(){
+		//alert("ok");
+		//WebSocket.getBoolean();
+		$scope.aspBreaker=WSocket.getBoolean();
+	};
+	
+	$scope.$on('$ionicView.enter', function () {
+          $scope.aspBreaker=WSocket.getBoolean();
+    });
 	
 })
 
