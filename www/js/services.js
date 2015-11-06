@@ -9,14 +9,14 @@ angular.module('starter.services', [])
 	name: 'No 1',
     kw: '1',
 	v: '378',
-    face: '/img/enercon-logo.png',
+    face: './img/enercon-logo.png',
 	status: 'Running'
   }, {
     id: 1,
     name: 'No2',
     kw: '0',
 	v: '380',
-    face: '/img/enercon-logo.png',
+    face: './img/enercon-logo.png',
 	status: 'Pause'
   }];
 
