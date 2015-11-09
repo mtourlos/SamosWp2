@@ -92,7 +92,7 @@ angular.module('starter.services', [])
     
     // Create our websocket object with the address to the websocket
     var ws = new WebSocket("ws://10.10.10.62:8080/OpcWebSockets/actions");
-	
+	var resp = [];
 	var bool;
 	var analog;
     
@@ -101,6 +101,8 @@ angular.module('starter.services', [])
     };
     
     ws.onmessage = function(message) {
+		//broadcastItem(message.data);
+		//sendRequest();
         listener(JSON.parse(message.data));
 		//$timeout(sendRequest,500);
 		//alert(message.data);
@@ -120,29 +122,24 @@ angular.module('starter.services', [])
     };
 
     function listener(data) {
-		var message=data;
-		//alert(message.analog);
-		analog=message.analog;
-		bool=message.boolean;
-		//broadcastItem();
-		//sendRequest();
-		
-		
-		
-		
+		resp = data;
+		broadcastItem();
+		sendRequest();
+	    };
+	
+	function broadcastItem(){
+		//alert("broadcasted");
+       $rootScope.$broadcast('boolBroadcast',resp);
     };
 	
-	//function broadcastItem(){
-		//alert("broadcasted");
-    //    $rootScope.$broadcast('handleBroadcast');
-    //};
 	
-	//return Service;
+	
+	return Service;
 
-    return {
-		getBoolean: function(){
+    //return {
+		//getBoolean: function(){
 			//alert("test");
-			return bool;
-		}	
-	};	
+			//return bool;
+		//}
+	//};	
 });

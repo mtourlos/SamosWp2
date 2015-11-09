@@ -21,13 +21,20 @@ angular.module('starter.controllers', [])
 	};
 	
 	$scope.receive = function(){
-		//alert("ok");
-		//WebSocket.getBoolean();
-		$scope.aspBreaker=WSocket.getBoolean();
+		alert("ok");
+		//$scope.aspBreaker=WSocket.getBoolean();
+		//$scope.aspBreaker="false";
 	};
 	
-	$scope.$on('$ionicView.enter', function () {
-          $scope.aspBreaker=WSocket.getBoolean();
+	$scope.$on('boolBroadcast', function (event,data) {
+		$scope.$apply(function () {
+			//alert(data.bool);
+            $scope.aspBreaker = data.boolean;
+			$scope.windspeed = data.analog;
+			//$scope.receive();
+			
+        });
+        //$scope.aspBreaker="false";
     });
 	
 })
