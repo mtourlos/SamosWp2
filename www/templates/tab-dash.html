@@ -2,7 +2,7 @@
 
 	<ion-content class="padding">
 		<div class="list card">
-			<div class="item item-divider text-center">MW 15{{totalMW}}</div>
+			<div class="item item-divider text-center">{{kw}} KW</div>
 			<div class="item item-body">
 				<div class="row" >
 					<div class="col col-50 text-center" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
@@ -16,16 +16,16 @@
 				</div>
 				<div class="row">
 					<div class="col col-50 text-center" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
-						25{{windspeed}} m/s
+						{{windSpeed}} m/s
 					</div>
 					<div class="col col-50 text-center">
-						14{{volts}} V
+						{{v1}} V
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="list card">
-			<div class="item item-divider text-center">Διαχείρηση Setpoint</div>
+			<div class="item item-divider text-center">Διαχείριση Setpoint</div>
 			<div class="item item-body">
 				<div class="row" >
 					<div class="col col-50 text-center" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
@@ -39,10 +39,12 @@
 				</div>
 				<div class="row" >
 					<div class="col col-50 text-center" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
-						35{{setpoint}} %
+						{{setpoint}} KW
 					</div>
 					<div class="col col-50 text-center">
-						Αυτόματη
+						<span ng-if=setpointMode=='0' ng-style={color:'lightgreen'}>Χειροκίνητη</span>
+						<span ng-if=setpointMode=='1' ng-style={color:'lightgreen'}>Εβδ. Πρόγραμμα</span>
+						<span ng-if=setpointMode=='2' ng-style={color:'lightgreen'}>Αυτόματη</span>
 					</div>
 				</div>
 			</div>
@@ -57,24 +59,24 @@
 					</div>
 					<div class="col col-50 text-center">
 						<i class="icon ion-toggle-filled"></i>
-						Διακόπτης ΑΣΠ
+						Διακόπτης ΔΕΗ
 					</div>
 				</div>
 				<div class="row" >
 					<div class="col col-50 text-center" style="border:1px solid; border-color:lightgrey; border-left-width:0px; border-top-width:0px; border-bottom-width:0px; ">
-						<span ng-if=parkBreaker=='true' ng-style={color:'lightgreen'}>Κλειστός</span>
-						<span ng-if=parkBreaker=='false' ng-style={color:'red'}>Ανοιχτός</span>
+						<span ng-if=mvBreakerClosed=='true' ng-style={color:'lightgreen'}>Κλειστός</span>
+						<span ng-if=mvBreakerClosed=='false' ng-style={color:'red'}>Ανοιχτός</span>
 					</div>
 					<div class="col col-50 text-center">
-						<span ng-if=aspBreaker=='true' ng-style={color:'lightgreen'}>Κλειστός</span>
-						<span ng-if=aspBreaker=='false' ng-style={color:'red'}>Ανοιχτός</span>
+						<span ng-if=towerBreakerClosed=='true' ng-style={color:'lightgreen'}>Κλειστός</span>
+						<span ng-if=towerBreakerClosed=='false' ng-style={color:'red'}>Ανοιχτός</span>
 					</div>
 				</div>
 			</div>
 		</div>
 		
-		<button class="button button-positive" ng-click="receive()">
+		<!--<button class="button button-positive" ng-click="receive()">
 			{{aspBreaker}}
-		</button>
+		</button>!-->
 	</ion-content>
 </ion-view>

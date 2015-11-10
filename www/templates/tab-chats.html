@@ -3,8 +3,8 @@
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="wg in wgs" type="item-text-wrap" href="#/tab/chats/{{wg.id}}">
         <img ng-src="{{wg.face}}">
-        <h2><span ng-if=wg.status=='Running' ng-style={color:'green'}>{{wg.name}} - {{wg.status}}</span></h2>
-		<h2><span ng-if=wg.status=='Pause' ng-style={color:'red'}>{{wg.name}} - {{wg.status}}</span></h2>
+        <h2><span ng-if=wg.status=='true' ng-style={color:'green'}>{{wg.name}} - Running</span></h2>
+		<h2><span ng-if=wg.status=='false' ng-style={color:'red'}>{{wg.name}} - Pause</span></h2>
         <p>{{wg.kw}} KW - {{wg.v}} V</p>
 		<i class="icon ion-chevron-right icon-accessory"></i>
         

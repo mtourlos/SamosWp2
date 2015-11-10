@@ -26,11 +26,18 @@ angular.module('starter.controllers', [])
 		//$scope.aspBreaker="false";
 	};
 	
-	$scope.$on('boolBroadcast', function (event,data) {
+	$scope.$on('mainBroadcast', function (event,data) {
 		$scope.$apply(function () {
 			//alert(data.bool);
-            $scope.aspBreaker = data.boolean;
-			$scope.windspeed = data.analog;
+			$scope.kw = data.kw;
+			$scope.windSpeed = data.windSpeed;
+			$scope.v1 = data.v1;
+			$scope.setpoint = data.setpoint;
+			$scope.setpointMode = data.setpointMode;
+			$scope.mvBreakerClosed = data.mvBreakerClosed;
+			$scope.towerBreakerClosed = data.towerBreakerClosed;
+            //$scope.aspBreaker = data.boolean;
+			//$scope.windspeed = data.analog;
 			//$scope.receive();
 			
         });

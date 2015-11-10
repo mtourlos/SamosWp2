@@ -10,14 +10,14 @@ angular.module('starter.services', [])
     kw: '1',
 	v: '378',
     face: './img/enercon-logo.png',
-	status: 'Running'
+	status: 'false'
   }, {
     id: 1,
     name: 'No2',
     kw: '0',
 	v: '380',
     face: './img/enercon-logo.png',
-	status: 'Pause'
+	status: 'false'
   }];
 
   return {
@@ -34,7 +34,14 @@ angular.module('starter.services', [])
         }
       }
       return null;
-    }
+    },
+	set: function(id,run,kw,v){
+		wgs[id].status=run
+		wgs[id].kw=kw;
+		wgs[id].v=v;
+		//alert(id);
+		return null;
+	}
   };
 })
 
@@ -45,45 +52,53 @@ angular.module('starter.services', [])
   var alarms = [{
     id: 0,
 	name: 'Πρόβλημα Επικοινωνίας με ΑΣΠ',
-	status: 'true'
-  }, {
-    id: 1,
-	name: 'Αστάθεια Ανέμου',
 	status: 'false'
-  }, {
+  },  {
     id: 1,
-	name: 'Αστάθεια Ανέμου',
+	name: 'Πρόβλημα Επικοινωνίας με ENERCON',
 	status: 'false'
-  }, {
+  },  {
     id: 2,
-	name: 'Μεγάλη Ταχύτητα Ανέμου',
+	name: 'Αστάθεια Ανέμου',
 	status: 'false'
   }, {
     id: 3,
-	name: 'Υπέρταση',
+	name: 'Μεγάλη Ταχύτητα Ανέμου',
 	status: 'false'
   }, {
     id: 4,
-	name: 'Υπερσυχνότητα',
+	name: 'Υπέρταση',
 	status: 'false'
   }, {
     id: 5,
-	name: 'Υπόταση',
+	name: 'Υπερσυχνότητα',
 	status: 'false'
   }, {
     id: 6,
+	name: 'Υπόταση',
+	status: 'false'
+  }, {
+    id: 7,
 	name: 'Υποσυχνότητα',
 	status: 'false'
-  }];
+  }, {
+	id: 8,
+	name: 'Σφάλμα συνημιτόνου',
+	status: 'false'
+ }];
 
  return {
     all: function() {
       return alarms;
-    }
+    },
+	set: function(id,status){
+		alarms[id].status=status;
+		return null;
+	}
   };
 })
 
-.factory('WSocket', function($q, $rootScope) {
+.factory('WSocket', function($q, $rootScope, Wgs, Alarms) {
     // We return this object to anything injecting our service
     var Service = {};
     // Keep all pending requests here until they get responses
@@ -124,13 +139,33 @@ angular.module('starter.services', [])
     function listener(data) {
 		resp = data;
 		broadcastItem();
+		updateWgens(data);
+		updateAlarms(data);
 		sendRequest();
 	    };
 	
 	function broadcastItem(){
 		//alert("broadcasted");
-       $rootScope.$broadcast('boolBroadcast',resp);
+       $rootScope.$broadcast('mainBroadcast',resp);
     };
+	
+	function updateWgens(data){
+		Wgs.set(0,data.wg1Run,data.wg1Kw,data.wg1V1);
+		Wgs.set(1,data.wg2Run,data.wg2Kw,data.wg2V1);
+		
+	};
+	
+	function updateAlarms(data){
+		Alarms.set(0,data.alarmAspCommerror);
+		Alarms.set(1,data.alarmEnerconCommerror);
+		Alarms.set(2,data.alarmWindBurstError);
+		Alarms.set(3,data.alarmHighWindSpeed);
+		Alarms.set(4,data.alarmOverVoltage);
+		Alarms.set(5,data.alarmOverFrequency);
+		Alarms.set(6,data.alarmUnderVoltage);
+		Alarms.set(7,data.alarmUnderFrequency);
+		Alarms.set(8,data.alarmCosfError);
+	}
 	
 	
 	
